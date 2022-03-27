@@ -10,7 +10,8 @@
       <TargetName>ATSTART_F425_V1</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060960::V5.06 update 7 (build 960)::.\ARMCC</pCCUsed>
+      <pArmCC>5060960::V5.06 update 7 (build 960)::.\ARMCC</pArmCC>
+      <pCCUsed>6160000::V6.16::ARMCLANG</pCCUsed>
       <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
@@ -133,11 +134,11 @@
             <RunIndependent>0</RunIndependent>
             <UpdateFlashBeforeDebugging>1</UpdateFlashBeforeDebugging>
             <Capability>1</Capability>
-            <DriverSelection>-1</DriverSelection>
+            <DriverSelection>4096</DriverSelection>
           </Flash1>
           <bUseTDR>1</bUseTDR>
           <Flash2>BIN\UL2CM3.DLL</Flash2>
-          <Flash3></Flash3>
+          <Flash3>"" ()</Flash3>
           <Flash4></Flash4>
           <pFcarmOut></pFcarmOut>
           <pFcarmGrp></pFcarmGrp>
@@ -336,7 +337,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>AT_START_F425_V1</Define>
+              <Define>AT32F425R8T7,USE_STDPERIPH_DRIVER,AT_START_F425_V1</Define>
               <Undefine></Undefine>
               <IncludePath>.\Source\custom_bsp;.\Source;.\Source\generated_clock_code\inc</IncludePath>
             </VariousControls>
@@ -391,6 +392,11 @@
               <FileName>f425_it.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Source\f425_it.c</FilePath>
+            </File>
+            <File>
+              <FileName>crc32_soft.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\crc32_soft.c</FilePath>
             </File>
           </Files>
         </Group>
