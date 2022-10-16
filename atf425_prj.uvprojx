@@ -10,8 +10,7 @@
       <TargetName>ATSTART_F425_V1</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pArmCC>5060960::V5.06 update 7 (build 960)::.\ARMCC</pArmCC>
-      <pCCUsed>6160000::V6.16::ARMCLANG</pCCUsed>
+      <pCCUsed>5060960::V5.06 update 7 (build 960)::.\ARMCC</pCCUsed>
       <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
@@ -339,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>AT32F425R8T7,USE_STDPERIPH_DRIVER,AT_START_F425_V1</Define>
               <Undefine></Undefine>
-              <IncludePath>.\Source\custom_bsp;.\Source;.\Source\generated_clock_code\inc</IncludePath>
+              <IncludePath>.\Source\custom_bsp;.\Source;.\Source\generated_clock_code\inc;.\Source\i2c_application_library</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -394,9 +393,24 @@
               <FilePath>.\Source\f425_it.c</FilePath>
             </File>
             <File>
-              <FileName>crc32_soft.c</FileName>
+              <FileName>oled.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\Source\crc32_soft.c</FilePath>
+              <FilePath>.\Source\oled.c</FilePath>
+            </File>
+            <File>
+              <FileName>oledfont.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\oledfont.c</FilePath>
+            </File>
+            <File>
+              <FileName>image_128_64_test1.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\image_128_64_test1.c</FilePath>
+            </File>
+            <File>
+              <FileName>image_128_160_test1.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\image_128_160_test1.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -417,6 +431,16 @@
               <FileName>at32f425_clock.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Source\generated_clock_code\src\at32f425_clock.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>i2c_application</GroupName>
+          <Files>
+            <File>
+              <FileName>i2c_application.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\i2c_application_library\i2c_application.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -485,6 +509,12 @@
         </targetInfos>
       </component>
       <component Cclass="Device" Cgroup="at32f425_firmware_library" Csub="gpio" Cvendor="ArteryTek" Cversion="2.0.0" condition="AT32F425 STDPERIPHERALS CRM">
+        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.1"/>
+        <targetInfos>
+          <targetInfo name="ATSTART_F425_V1"/>
+        </targetInfos>
+      </component>
+      <component Cclass="Device" Cgroup="at32f425_firmware_library" Csub="i2c" Cvendor="ArteryTek" Cversion="2.0.0" condition="AT32F425 STDPERIPHERALS CRM">
         <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.1"/>
         <targetInfos>
           <targetInfo name="ATSTART_F425_V1"/>
@@ -599,6 +629,14 @@
       <file attr="config" category="source" name="Device\Firmware\Peripherals\src\at32f425_gpio.c" version="2.0.0">
         <instance index="0">RTE\Device\-AT32F425R8T7-7\at32f425_gpio.c</instance>
         <component Cclass="Device" Cgroup="at32f425_firmware_library" Csub="gpio" Cvendor="ArteryTek" Cversion="2.0.0" condition="AT32F425 STDPERIPHERALS CRM"/>
+        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.1"/>
+        <targetInfos>
+          <targetInfo name="ATSTART_F425_V1"/>
+        </targetInfos>
+      </file>
+      <file attr="config" category="source" name="Device\Firmware\Peripherals\src\at32f425_i2c.c" version="2.0.0">
+        <instance index="0">RTE\Device\-AT32F425R8T7-7\at32f425_i2c.c</instance>
+        <component Cclass="Device" Cgroup="at32f425_firmware_library" Csub="i2c" Cvendor="ArteryTek" Cversion="2.0.0" condition="AT32F425 STDPERIPHERALS CRM"/>
         <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.1"/>
         <targetInfos>
           <targetInfo name="ATSTART_F425_V1"/>

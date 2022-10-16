@@ -30,6 +30,8 @@
 #define RTE_DEVICE_STDPERIPHERALS_EXINT
 /* ArteryTek::Device:at32f425_firmware_library:gpio:2.0.0 */
 #define RTE_DEVICE_STDPERIPHERALS_GPIO
+/* ArteryTek::Device:at32f425_firmware_library:i2c:2.0.0 */
+#define RTE_DEVICE_STDPERIPHERALS_I2C
 /* ArteryTek::Device:at32f425_firmware_library:misc:2.0.0 */
 #define RTE_DEVICE_STDPERIPHERALS_MISC
 /* ArteryTek::Device:at32f425_firmware_library:scfg:2.0.0 */

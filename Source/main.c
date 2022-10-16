@@ -1,64 +1,71 @@
 #include "at32f425.h"
 #include "at32f425_clock.h"
+#include "i2c_application.h"
+
+#include "oled.h"
+
 #include "custom_at32f425_board.h"
 
-__IO uint32_t g_Ticks;
+__IO uint32_t g_Ticks;                                
 
-#define TEST_LOOP 5000
-#define CRC32_REF_RESULT 0xE5DFCF6D
+#define I2Cx_ADDRESS                     0xAA
 
-#define BUFFER_SIZE 120
-static const uint32_t data_buffer[BUFFER_SIZE] = {
-    0xc33dd31c, 0xe37ff35e, 0x129022f3, 0x32d24235, 0x52146277, 0x7256b5ea,
-    0x4a755a54, 0x6a377a16, 0x0af11ad0, 0x2ab33a92, 0xed0fdd6c, 0xcd4dbdaa,
-    0xbb3bab1a, 0x6ca67c87, 0x5cc52c22, 0x3c030c60, 0x1c41edae, 0xfd8fcdec,
-    0xad8b9de8, 0x8dc97c26, 0x5c644c45, 0x3ca22c83, 0x1ce00cc1, 0xef1fff3e,
-    0x95a88589, 0xf56ee54f, 0xd52cc50d, 0x34e224c3, 0x04817466, 0x64475424,
-    0x78066827, 0x18c008e1, 0x28a3cb7d, 0xdb5ceb3f, 0xfb1e8bf9, 0x9bd8abbb,
-    0xdf7caf9b, 0xbfba8fd9, 0x9ff86e17, 0x7e364e55, 0x2e933eb2, 0x0ed11ef0,
-    0xa35ad3bd, 0xc39cf3ff, 0xe3de2462, 0x34430420, 0x64e674c7, 0x44a45485,
-    0xad2abd0b, 0x8d689d49, 0x7e976eb6, 0x5ed54ef4, 0x2e321e51, 0x0e70ff9f,
-    0xefbedfdd, 0xcffcbf1b, 0x9f598f78, 0x918881a9, 0xb1caa1eb, 0xd10cc12d,
-    0xe16f1080, 0x00a130c2, 0x20e35004, 0x40257046, 0x83b99398, 0xa3fbb3da,
-    0x00001021, 0x20423063, 0x408450a5, 0x60c670e7, 0x9129a14a, 0xb16bc18c,
-    0x569546b4, 0xb75ba77a, 0x97198738, 0xf7dfe7fe, 0xc7bc48c4, 0x58e56886,
-    0x4405a7db, 0xb7fa8799, 0xe75ff77e, 0xc71dd73c, 0x26d336f2, 0x069116b0,
-    0x76764615, 0x5634d94c, 0xc96df90e, 0xe92f99c8, 0xb98aa9ab, 0x58444865,
-    0x78a70840, 0x18612802, 0xc9ccd9ed, 0xe98ef9af, 0x89489969, 0xa90ab92b,
-    0xd1ade1ce, 0xf1ef1231, 0x32732252, 0x52b54294, 0x72f762d6, 0x93398318,
-    0xa56ab54b, 0x85289509, 0xf5cfc5ac, 0xd58d3653, 0x26721611, 0x063076d7,
-    0x8d689d49, 0xf7dfe7fe, 0xe98ef9af, 0x063076d7, 0x93398318, 0xb98aa9ab,
-    0x4ad47ab7, 0x6a961a71, 0x0a503a33, 0x2a12dbfd, 0xfbbfeb9e, 0x9b798b58};
+#define I2Cx_PORT                        I2C1
+#define I2Cx_CLK                         CRM_I2C1_PERIPH_CLOCK
+#define I2Cx_DMA                         DMA1
+#define I2Cx_DMA_CLK                     CRM_DMA1_PERIPH_CLOCK
+                                         
+#define I2Cx_SCL_GPIO_CLK                CRM_GPIOB_PERIPH_CLOCK
+#define I2Cx_SCL_GPIO_PIN                GPIO_PINS_6
+#define I2Cx_SCL_GPIO_PinsSource         GPIO_PINS_SOURCE6  
+#define I2Cx_SCL_GPIO_PORT               GPIOB
+#define I2Cx_SCL_GPIO_MUX                GPIO_MUX_1     
+                                         
+#define I2Cx_SDA_GPIO_CLK                CRM_GPIOB_PERIPH_CLOCK
+#define I2Cx_SDA_GPIO_PIN                GPIO_PINS_7   
+#define I2Cx_SDA_GPIO_PinsSource         GPIO_PINS_SOURCE7      
+#define I2Cx_SDA_GPIO_PORT               GPIOB
+#define I2Cx_SDA_GPIO_MUX                GPIO_MUX_1 
 
-static const uint32_t bswap32_data_buffer[BUFFER_SIZE] = {
-    0x1CD33DC3, 0x5EF37FE3, 0xF3229012, 0x3542D232, 0x77621452, 0xEAB55672,
-    0x545A754A, 0x167A376A, 0xD01AF10A, 0x923AB32A, 0x6CDD0FED, 0xAABD4DCD,
-    0x1AAB3BBB, 0x877CA66C, 0x222CC55C, 0x600C033C, 0xAEED411C, 0xECCD8FFD,
-    0xE89D8BAD, 0x267CC98D, 0x454C645C, 0x832CA23C, 0xC10CE01C, 0x3EFF1FEF,
-    0x8985A895, 0x4FE56EF5, 0x0DC52CD5, 0xC324E234, 0x66748104, 0x24544764,
-    0x27680678, 0xE108C018, 0x7DCBA328, 0x3FEB5CDB, 0xF98B1EFB, 0xBBABD89B,
-    0x9BAF7CDF, 0xD98FBABF, 0x176EF89F, 0x554E367E, 0xB23E932E, 0xF01ED10E,
-    0xBDD35AA3, 0xFFF39CC3, 0x6224DEE3, 0x20044334, 0xC774E664, 0x8554A444,
-    0x0BBD2AAD, 0x499D688D, 0xB66E977E, 0xF44ED55E, 0x511E322E, 0x9FFF700E,
-    0xDDDFBEEF, 0x1BBFFCCF, 0x788F599F, 0xA9818891, 0xEBA1CAB1, 0x2DC10CD1,
-    0x80106FE1, 0xC230A100, 0x0450E320, 0x46702540, 0x9893B983, 0xDAB3FBA3,
-    0x21100000, 0x63304220, 0xA5508440, 0xE770C660, 0x4AA12991, 0x8CC16BB1,
-    0xB4469556, 0x7AA75BB7, 0x38871997, 0xFEE7DFF7, 0xC448BCC7, 0x8668E558,
-    0xDBA70544, 0x9987FAB7, 0x7EF75FE7, 0x3CD71DC7, 0xF236D326, 0xB0169106,
-    0x15467676, 0x4CD93456, 0x0EF96DC9, 0xC8992FE9, 0xABA98AB9, 0x65484458,
-    0x4008A778, 0x02286118, 0xEDD9CCC9, 0xAFF98EE9, 0x69994889, 0x2BB90AA9,
-    0xCEE1ADD1, 0x3112EFF1, 0x52227332, 0x9442B552, 0xD662F772, 0x18833993,
-    0x4BB56AA5, 0x09952885, 0xACC5CFF5, 0x53368DD5, 0x11167226, 0xD7763006,
-    0x499D688D, 0xFEE7DFF7, 0xAFF98EE9, 0xD7763006, 0x18833993, 0xABA98AB9,
-    0xB77AD44A, 0x711A966A, 0x333A500A, 0xFDDB122A, 0x9EEBBFFB, 0x588B799B,
+i2c_handle_type hi2cx;
+
+enum I2C_FREQ_CONF {
+    I2C_FREQ_10KHZ = 0x2170FAFA,
+    I2C_FREQ_50KHZ = 0x80E06565,
+    I2C_FREQ_100KHZ = 0x80E03030,
+    I2C_FREQ_200KHZ = 0X20E0355F,
+    I2C_FREQ_INVALID = UINT32_MAX,
 };
 
-__IO uint32_t crc_value = 0;
+/**
+  * @brief  compare whether the valus of buffer 1 and buffer 2 are equal.
+  * @param  buffer1: buffer 1 address.
+            buffer2: buffer 2 address.
+  * @retval 0: equal.
+  *         1: unequal.
+  */
+uint32_t buffer_compare(uint8_t* buffer1, uint8_t* buffer2, uint32_t len)
+{
+  uint32_t i;
+  
+  for(i = 0; i < len; i++)
+  {
+    if(buffer1[i] != buffer2[i])
+    {
+      return 1;
+    }
+  }
 
-extern uint32_t xcrc32(const uint8_t *buf, size_t len, uint32_t init);
+  return 0;
+}
 
 int main(void) {
-  system_clock_config();
+	  i2c_status_type i2c_status;
+
+  /* config nvic priority group */
+  nvic_priority_group_config(NVIC_PRIORITY_GROUP_4);
+	
+//  system_clock_config();
 
   uint32_t test_tick_0;
   uint32_t test_tick_1;
@@ -68,71 +75,27 @@ int main(void) {
 
   uart_print_init(115200);
   at32_board_init();
-  /* enable crc clock */
-  crm_periph_clock_enable(CRM_CRC_PERIPH_CLOCK, TRUE);
-
+	
+  hi2cx.i2cx = I2Cx_PORT;
+  /* i2c config */
+  i2c_config(&hi2cx);
+	
   printf("AT START F425 Board @ %u MHz\n", system_core_clock / (1000000));
   printf("Boot Mem:%02X\n", scfg_mem_map_get());
 
-  printf("CRC test start\n");
-
-  {
-    crc_data_reset();
-    crc_value = crc_block_calculate((uint32_t *)data_buffer, BUFFER_SIZE);
-    printf("Hardware:\t%08X\n", crc_value);
-    crc_value = xcrc32((const uint8_t *)bswap32_data_buffer,
-                       sizeof(bswap32_data_buffer), 0xffffffff);
-    printf("Software:\t%08X\n", crc_value);
-  }
-  {
-    crc_data_reset();
-    crc_value =
-        crc_block_calculate((uint32_t *)bswap32_data_buffer, BUFFER_SIZE);
-    printf("Hardware:\t%08X\n", crc_value);
-    crc_value =
-        xcrc32((const uint8_t *)data_buffer, sizeof(data_buffer), 0xffffffff);
-    printf("Software:\t%08X\n", crc_value);
-  }
-
-  test_tick_0 = g_Ticks;
-  for (uint32_t i = 0; i < TEST_LOOP; ++i) {
-    crc_data_reset();
-
-    /* compute the crc of "data_buffer" */
-    crc_value = crc_block_calculate((uint32_t *)data_buffer, BUFFER_SIZE);
-    if (crc_value == CRC32_REF_RESULT) {
-      continue;
-    } else {
-      printf("error %08X\n", crc_value);
-      break;
-    }
-  }
-  test_tick_1 = g_Ticks;
-
-  printf("Hardware CRC test end[%08X], %u, %u, [%u]\n", crc_value, test_tick_0,
-         test_tick_1, (test_tick_1 - test_tick_0));
-
-  test_tick_0 = g_Ticks;
-  for (uint32_t i = 0; i < TEST_LOOP; ++i) {
-    crc_value = xcrc32((const uint8_t *)bswap32_data_buffer,
-                       sizeof(bswap32_data_buffer), 0xffffffff);
-
-    if (crc_value == CRC32_REF_RESULT) {
-      continue;
-    } else {
-      printf("error %08X\n", crc_value);
-      break;
-    }
-  }
-  test_tick_1 = g_Ticks;
-
-  printf("Software CRC test end[%08X], %u, %u, [%u]\n", crc_value, test_tick_0,
-         test_tick_1, (test_tick_1 - test_tick_0));
+  printf("I2C test start\n");
 
   printf("F425@ %u MHz\n", system_core_clock / (1000000));
 
+  MD066_Init();
+  MD066_Clear();
+
   while (1) {
-    // printf("%u MHz, Ticks:%u\n", system_core_clock/(1000000), g_Ticks);
+		  MD066_Init();
+		
+    MD066_Demo();
+
+ printf("P1 %u MHz, Ticks:%u\n", system_core_clock/(1000000), g_Ticks);
 
     test_tick_0 = g_Ticks;
     while ((test_tick_0 + 200) > g_Ticks) {
@@ -140,6 +103,7 @@ int main(void) {
       __WFI();
     }
     at32_led_toggle(LED2);
+ printf("P2 %u MHz, Ticks:%u\n", system_core_clock/(1000000), g_Ticks);
 
     test_tick_0 = g_Ticks;
     while ((test_tick_0 + 400) > g_Ticks) {
@@ -147,6 +111,7 @@ int main(void) {
       __WFI();
     }
     at32_led_toggle(LED3);
+ printf("P3 %u MHz, Ticks:%u\n", system_core_clock/(1000000), g_Ticks);
 
     test_tick_0 = g_Ticks;
     while ((test_tick_0 + 800) > g_Ticks) {
@@ -154,5 +119,48 @@ int main(void) {
       __WFI();
     }
     at32_led_toggle(LED4);
+		 printf("P4 %u MHz, Ticks:%u\n", system_core_clock/(1000000), g_Ticks);
+
+  }
+}
+
+/**
+  * @brief  initializes peripherals used by the i2c.
+  * @param  none
+  * @retval none
+  */
+void i2c_lowlevel_init(i2c_handle_type* hi2c)
+{
+  gpio_init_type gpio_init_structure;
+  
+  if(hi2c->i2cx == I2Cx_PORT)
+  {
+    /* i2c periph clock enable */
+    crm_periph_clock_enable(I2Cx_CLK, TRUE);    
+    crm_periph_clock_enable(I2Cx_SCL_GPIO_CLK, TRUE);
+    crm_periph_clock_enable(I2Cx_SDA_GPIO_CLK, TRUE);
+    
+    /* gpio configuration */  
+    gpio_pin_mux_config(I2Cx_SCL_GPIO_PORT, I2Cx_SCL_GPIO_PinsSource, I2Cx_SCL_GPIO_MUX);
+    
+    gpio_pin_mux_config(I2Cx_SDA_GPIO_PORT, I2Cx_SDA_GPIO_PinsSource, I2Cx_SDA_GPIO_MUX);
+    
+    /* configure i2c pins: scl */
+    gpio_init_structure.gpio_drive_strength = GPIO_DRIVE_STRENGTH_STRONGER;
+    gpio_init_structure.gpio_mode           = GPIO_MODE_MUX;
+    gpio_init_structure.gpio_out_type       = GPIO_OUTPUT_OPEN_DRAIN;
+    gpio_init_structure.gpio_pull           = GPIO_PULL_UP;  
+                                            
+    gpio_init_structure.gpio_pins           = I2Cx_SCL_GPIO_PIN;
+    gpio_init(I2Cx_SCL_GPIO_PORT, &gpio_init_structure);
+
+    /* configure i2c pins: sda */
+    gpio_init_structure.gpio_pins           = I2Cx_SDA_GPIO_PIN;
+    gpio_init(I2Cx_SDA_GPIO_PORT, &gpio_init_structure); 
+    
+    /* config i2c */ 
+    i2c_init(hi2c->i2cx, 0, I2C_FREQ_200KHZ);
+    
+    i2c_own_address1_set(hi2c->i2cx, I2C_ADDRESS_MODE_7BIT, I2Cx_ADDRESS);
   }
 }
