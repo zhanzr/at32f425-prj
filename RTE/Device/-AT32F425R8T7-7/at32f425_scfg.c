@@ -194,7 +194,7 @@ void scfg_pins_ultra_driven_enable(scfg_ultra_driven_pins_type value, confirm_st
   *         - SCFG_FULL_DUPLEX_I2S1_I2S2
   * @retval none
   */
-void scfg_i2s_full_duplex_config(scfg_i2S_type i2s_full_duplex)
+void scfg_i2s_full_duplex_config(scfg_i2s_type i2s_full_duplex)
 {
   SCFG->cfg2_bit.i2s_fd = i2s_full_duplex;
 }

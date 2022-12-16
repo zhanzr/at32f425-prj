@@ -23,7 +23,6 @@
   *
   **************************************************************************
   */
-
 #include "i2c_application.h"
 
 /** @addtogroup AT32F425_middlewares_i2c_application_library
@@ -265,7 +264,7 @@ void i2c_dma_config(i2c_handle_type* hi2c, dma_channel_type* dma_channel, uint8_
   *         - I2C_GEN_START_WRITE: send data and generate start.
   * @retval i2c status.
   */
-void i2c_start_transfer(i2c_handle_type* hi2c, uint16_t address, i2c_start_stop_mode_type start_stop)
+void i2c_start_transfer(i2c_handle_type* hi2c, uint16_t address, i2c_start_mode_type start_stop)
 {
   if (hi2c->pcount > MAX_TRANSFER_CNT)
   {
@@ -292,7 +291,7 @@ void i2c_start_transfer(i2c_handle_type* hi2c, uint16_t address, i2c_start_stop_
   *         - I2C_GEN_START_WRITE: send data and generate start.
   * @retval i2c status.
   */
-void i2c_start_transfer_dma(i2c_handle_type* hi2c, dma_channel_type* dma_channelx, uint16_t address, i2c_start_stop_mode_type start_stop)
+void i2c_start_transfer_dma(i2c_handle_type* hi2c, dma_channel_type* dma_channelx, uint16_t address, i2c_start_mode_type start_stop)
 {
   if (hi2c->pcount > MAX_TRANSFER_CNT)
   {

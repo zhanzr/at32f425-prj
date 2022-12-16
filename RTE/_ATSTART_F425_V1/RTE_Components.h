@@ -16,18 +16,10 @@
  */
 #define CMSIS_device_header "at32f425.h"
 
-/* ArteryTek::Device:at32f425_firmware_library:adc:2.0.0 */
-#define RTE_DEVICE_STDPERIPHERALS_ADC
-/* ArteryTek::Device:at32f425_firmware_library:crc:2.0.0 */
-#define RTE_DEVICE_STDPERIPHERALS_CRC
 /* ArteryTek::Device:at32f425_firmware_library:crm:2.0.0 */
 #define RTE_DEVICE_STDPERIPHERALS_CRM
-/* ArteryTek::Device:at32f425_firmware_library:debug:2.0.0 */
-#define RTE_DEVICE_STDPERIPHERALS_DEBUG
 /* ArteryTek::Device:at32f425_firmware_library:dma:2.0.0 */
 #define RTE_DEVICE_STDPERIPHERALS_DMA
-/* ArteryTek::Device:at32f425_firmware_library:exint:2.0.0 */
-#define RTE_DEVICE_STDPERIPHERALS_EXINT
 /* ArteryTek::Device:at32f425_firmware_library:gpio:2.0.0 */
 #define RTE_DEVICE_STDPERIPHERALS_GPIO
 /* ArteryTek::Device:at32f425_firmware_library:i2c:2.0.0 */

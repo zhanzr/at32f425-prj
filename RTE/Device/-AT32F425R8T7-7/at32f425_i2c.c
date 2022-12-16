@@ -597,7 +597,7 @@ void i2c_dma_enable(i2c_type *i2c_x, i2c_dma_request_type dma_req, confirm_state
   *         - I2C_GEN_START_WRITE: send data and generate start.
   * @retval none
   */
-void i2c_transmit_set(i2c_type *i2c_x, uint16_t address, uint8_t cnt, i2c_reload_stop_mode_type rld_stop, i2c_start_stop_mode_type start_stop)
+void i2c_transmit_set(i2c_type *i2c_x, uint16_t address, uint8_t cnt, i2c_reload_stop_mode_type rld_stop, i2c_start_mode_type start_stop)
 {
   /* clear ctrl2_bit specific bits */
   i2c_x->ctrl2 &= ~0x03FF67FF;

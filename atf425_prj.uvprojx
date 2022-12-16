@@ -16,7 +16,7 @@
         <TargetCommonOption>
           <Device>-AT32F425R8T7-7</Device>
           <Vendor>ArteryTek</Vendor>
-          <PackID>ArteryTek.AT32F425_DFP.2.0.1</PackID>
+          <PackID>ArteryTek.AT32F425_DFP.2.0.6</PackID>
           <Cpu>IRAM(0x20000000,0x5000) IROM(0x08000000,0x10000) CPUTYPE("Cortex-M4") CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -137,7 +137,7 @@
           </Flash1>
           <bUseTDR>1</bUseTDR>
           <Flash2>BIN\UL2CM3.DLL</Flash2>
-          <Flash3>"" ()</Flash3>
+          <Flash3></Flash3>
           <Flash4></Flash4>
           <pFcarmOut></pFcarmOut>
           <pFcarmGrp></pFcarmGrp>
@@ -460,104 +460,80 @@
   <RTE>
     <apis/>
     <components>
-      <component Cclass="CMSIS" Cgroup="CORE" Cvendor="ARM" Cversion="5.5.0" condition="ARMv6_7_8-M Device">
-        <package name="CMSIS" schemaVersion="1.3" url="http://www.keil.com/pack/" vendor="ARM" version="5.8.0"/>
+      <component Cclass="CMSIS" Cgroup="CORE" Cvendor="ARM" Cversion="5.6.0" condition="ARMv6_7_8-M Device">
+        <package name="CMSIS" schemaVersion="1.7.7" url="http://www.keil.com/pack/" vendor="ARM" version="5.9.0"/>
+        <targetInfos>
+          <targetInfo name="ATSTART_F425_V1"/>
+        </targetInfos>
+      </component>
+      <component Cclass="Device" Cgroup="Startup" Cvendor="ArteryTek" Cversion="2.0.0" condition="AT32F425">
+        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.6"/>
         <targetInfos>
           <targetInfo name="ATSTART_F425_V1"/>
         </targetInfos>
       </component>
       <component Cclass="Device" Cgroup="at32f425_conf" Cvendor="ArteryTek" Cversion="2.0.0" condition="AT32F425 CMSIS">
-        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.1"/>
-        <targetInfos>
-          <targetInfo name="ATSTART_F425_V1"/>
-        </targetInfos>
-      </component>
-      <component Cclass="Device" Cgroup="at32f425_firmware_library" Csub="adc" Cvendor="ArteryTek" Cversion="2.0.0" condition="AT32F425 STDPERIPHERALS CRM">
-        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.1"/>
-        <targetInfos>
-          <targetInfo name="ATSTART_F425_V1"/>
-        </targetInfos>
-      </component>
-      <component Cclass="Device" Cgroup="at32f425_firmware_library" Csub="crc" Cvendor="ArteryTek" Cversion="2.0.0" condition="AT32F425 STDPERIPHERALS CRM">
-        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.1"/>
+        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.6"/>
         <targetInfos>
           <targetInfo name="ATSTART_F425_V1"/>
         </targetInfos>
       </component>
       <component Cclass="Device" Cgroup="at32f425_firmware_library" Csub="crm" Cvendor="ArteryTek" Cversion="2.0.0" condition="AT32F425 STDPERIPHERALS MISC">
-        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.1"/>
-        <targetInfos>
-          <targetInfo name="ATSTART_F425_V1"/>
-        </targetInfos>
-      </component>
-      <component Cclass="Device" Cgroup="at32f425_firmware_library" Csub="debug" Cvendor="ArteryTek" Cversion="2.0.0" condition="AT32F425 STDPERIPHERALS CRM">
-        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.1"/>
+        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.6"/>
         <targetInfos>
           <targetInfo name="ATSTART_F425_V1"/>
         </targetInfos>
       </component>
       <component Cclass="Device" Cgroup="at32f425_firmware_library" Csub="dma" Cvendor="ArteryTek" Cversion="2.0.0" condition="AT32F425 STDPERIPHERALS CRM">
-        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.1"/>
-        <targetInfos>
-          <targetInfo name="ATSTART_F425_V1"/>
-        </targetInfos>
-      </component>
-      <component Cclass="Device" Cgroup="at32f425_firmware_library" Csub="exint" Cvendor="ArteryTek" Cversion="2.0.0" condition="AT32F425 STDPERIPHERALS CRM">
-        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.1"/>
+        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.6"/>
         <targetInfos>
           <targetInfo name="ATSTART_F425_V1"/>
         </targetInfos>
       </component>
       <component Cclass="Device" Cgroup="at32f425_firmware_library" Csub="gpio" Cvendor="ArteryTek" Cversion="2.0.0" condition="AT32F425 STDPERIPHERALS CRM">
-        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.1"/>
+        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.6"/>
         <targetInfos>
           <targetInfo name="ATSTART_F425_V1"/>
         </targetInfos>
       </component>
       <component Cclass="Device" Cgroup="at32f425_firmware_library" Csub="i2c" Cvendor="ArteryTek" Cversion="2.0.0" condition="AT32F425 STDPERIPHERALS CRM">
-        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.1"/>
+        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.6"/>
         <targetInfos>
           <targetInfo name="ATSTART_F425_V1"/>
         </targetInfos>
       </component>
       <component Cclass="Device" Cgroup="at32f425_firmware_library" Csub="misc" Cvendor="ArteryTek" Cversion="2.0.0" condition="AT32F425 CMSIS">
-        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.1"/>
+        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.6"/>
         <targetInfos>
           <targetInfo name="ATSTART_F425_V1"/>
         </targetInfos>
       </component>
       <component Cclass="Device" Cgroup="at32f425_firmware_library" Csub="scfg" Cvendor="ArteryTek" Cversion="2.0.0" condition="AT32F425 STDPERIPHERALS CRM">
-        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.1"/>
+        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.6"/>
         <targetInfos>
           <targetInfo name="ATSTART_F425_V1"/>
         </targetInfos>
       </component>
       <component Cclass="Device" Cgroup="at32f425_firmware_library" Csub="usart" Cvendor="ArteryTek" Cversion="2.0.0" condition="AT32F425 STDPERIPHERALS CRM">
-        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.1"/>
-        <targetInfos>
-          <targetInfo name="ATSTART_F425_V1"/>
-        </targetInfos>
-      </component>
-      <component Cclass="Device" Cgroup="startup" Cvendor="ArteryTek" Cversion="2.0.0" condition="AT32F425">
-        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.1"/>
+        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.6"/>
         <targetInfos>
           <targetInfo name="ATSTART_F425_V1"/>
         </targetInfos>
       </component>
       <component Cbundle="ARM Compiler" Cclass="Compiler" Cgroup="I/O" Csub="STDERR" Cvariant="User" Cvendor="Keil" Cversion="1.2.0" condition="ARMCC Cortex-M">
-        <package name="ARM_Compiler" schemaVersion="1.6.3" url="http://www.keil.com/pack/" vendor="Keil" version="1.7.0"/>
+        <package name="ARM_Compiler" schemaVersion="1.7.7" url="https://www.keil.com/pack/" vendor="Keil" version="1.7.2"/>
         <targetInfos>
           <targetInfo name="ATSTART_F425_V1"/>
         </targetInfos>
       </component>
       <component Cbundle="ARM Compiler" Cclass="Compiler" Cgroup="I/O" Csub="STDOUT" Cvariant="User" Cvendor="Keil" Cversion="1.2.0" condition="ARMCC Cortex-M">
-        <package name="ARM_Compiler" schemaVersion="1.6.3" url="http://www.keil.com/pack/" vendor="Keil" version="1.7.0"/>
+        <package name="ARM_Compiler" schemaVersion="1.7.7" url="https://www.keil.com/pack/" vendor="Keil" version="1.7.2"/>
         <targetInfos>
           <targetInfo name="ATSTART_F425_V1"/>
         </targetInfos>
       </component>
       <component Cbundle="ARM Compiler" Cclass="Compiler" Cgroup="I/O" Csub="TTY" Cvariant="User" Cvendor="Keil" Cversion="1.2.0" condition="ARMCC Cortex-M">
-        <package name="ARM_Compiler" schemaVersion="1.6.3" url="http://www.keil.com/pack/" vendor="Keil" version="1.7.0"/>
+        <package name="ARM_Compiler" schemaVersion="1.7.7" url="https://www.keil.com/pack/" vendor="Keil" version="1.7.2"/>
         <targetInfos>
           <targetInfo name="ATSTART_F425_V1"/>
         </targetInfos>
@@ -565,71 +541,63 @@
     </components>
     <files>
       <file attr="config" category="source" name="Device\Firmware\Peripherals\src\at32f425_adc.c" version="2.0.0">
-        <instance index="0">RTE\Device\-AT32F425R8T7-7\at32f425_adc.c</instance>
+        <instance index="0" removed="1">RTE\Device\-AT32F425R8T7-7\at32f425_adc.c</instance>
         <component Cclass="Device" Cgroup="at32f425_firmware_library" Csub="adc" Cvendor="ArteryTek" Cversion="2.0.0" condition="AT32F425 STDPERIPHERALS CRM"/>
-        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.1"/>
-        <targetInfos>
-          <targetInfo name="ATSTART_F425_V1"/>
-        </targetInfos>
+        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.6"/>
+        <targetInfos/>
       </file>
       <file attr="config" category="source" name="Device\Utilities\at32f425_board.c" version="2.0.0">
         <instance index="0" removed="1">RTE\Device\-AT32F425R8T7-7\at32f425_board.c</instance>
         <component Cclass="Device" Cgroup="evb" Csub="at-start-f425" Cvendor="ArteryTek" Cversion="2.0.0" condition="AT32F425 STDPERIPHERALS EVB"/>
-        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.1"/>
+        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.6"/>
         <targetInfos/>
       </file>
       <file attr="config" category="header" name="Device\Include\at32f425_conf.h" version="2.0.0">
         <instance index="0">RTE\Device\-AT32F425R8T7-7\at32f425_conf.h</instance>
         <component Cclass="Device" Cgroup="at32f425_conf" Cvendor="ArteryTek" Cversion="2.0.0" condition="AT32F425 CMSIS"/>
-        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.1"/>
+        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.6"/>
         <targetInfos>
           <targetInfo name="ATSTART_F425_V1"/>
         </targetInfos>
       </file>
       <file attr="config" category="source" name="Device\Firmware\Peripherals\src\at32f425_crc.c" version="2.0.0">
-        <instance index="0">RTE\Device\-AT32F425R8T7-7\at32f425_crc.c</instance>
+        <instance index="0" removed="1">RTE\Device\-AT32F425R8T7-7\at32f425_crc.c</instance>
         <component Cclass="Device" Cgroup="at32f425_firmware_library" Csub="crc" Cvendor="ArteryTek" Cversion="2.0.0" condition="AT32F425 STDPERIPHERALS CRM"/>
-        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.1"/>
-        <targetInfos>
-          <targetInfo name="ATSTART_F425_V1"/>
-        </targetInfos>
+        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.6"/>
+        <targetInfos/>
       </file>
       <file attr="config" category="source" name="Device\Firmware\Peripherals\src\at32f425_crm.c" version="2.0.0">
         <instance index="0">RTE\Device\-AT32F425R8T7-7\at32f425_crm.c</instance>
         <component Cclass="Device" Cgroup="at32f425_firmware_library" Csub="crm" Cvendor="ArteryTek" Cversion="2.0.0" condition="AT32F425 STDPERIPHERALS MISC"/>
-        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.1"/>
+        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.6"/>
         <targetInfos>
           <targetInfo name="ATSTART_F425_V1"/>
         </targetInfos>
       </file>
       <file attr="config" category="source" name="Device\Firmware\Peripherals\src\at32f425_debug.c" version="2.0.0">
-        <instance index="0">RTE\Device\-AT32F425R8T7-7\at32f425_debug.c</instance>
+        <instance index="0" removed="1">RTE\Device\-AT32F425R8T7-7\at32f425_debug.c</instance>
         <component Cclass="Device" Cgroup="at32f425_firmware_library" Csub="debug" Cvendor="ArteryTek" Cversion="2.0.0" condition="AT32F425 STDPERIPHERALS CRM"/>
-        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.1"/>
-        <targetInfos>
-          <targetInfo name="ATSTART_F425_V1"/>
-        </targetInfos>
+        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.6"/>
+        <targetInfos/>
       </file>
       <file attr="config" category="source" name="Device\Firmware\Peripherals\src\at32f425_dma.c" version="2.0.0">
         <instance index="0">RTE\Device\-AT32F425R8T7-7\at32f425_dma.c</instance>
         <component Cclass="Device" Cgroup="at32f425_firmware_library" Csub="dma" Cvendor="ArteryTek" Cversion="2.0.0" condition="AT32F425 STDPERIPHERALS CRM"/>
-        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.1"/>
+        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.6"/>
         <targetInfos>
           <targetInfo name="ATSTART_F425_V1"/>
         </targetInfos>
       </file>
       <file attr="config" category="source" name="Device\Firmware\Peripherals\src\at32f425_exint.c" version="2.0.0">
-        <instance index="0">RTE\Device\-AT32F425R8T7-7\at32f425_exint.c</instance>
+        <instance index="0" removed="1">RTE\Device\-AT32F425R8T7-7\at32f425_exint.c</instance>
         <component Cclass="Device" Cgroup="at32f425_firmware_library" Csub="exint" Cvendor="ArteryTek" Cversion="2.0.0" condition="AT32F425 STDPERIPHERALS CRM"/>
-        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.1"/>
-        <targetInfos>
-          <targetInfo name="ATSTART_F425_V1"/>
-        </targetInfos>
+        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.6"/>
+        <targetInfos/>
       </file>
       <file attr="config" category="source" name="Device\Firmware\Peripherals\src\at32f425_gpio.c" version="2.0.0">
         <instance index="0">RTE\Device\-AT32F425R8T7-7\at32f425_gpio.c</instance>
         <component Cclass="Device" Cgroup="at32f425_firmware_library" Csub="gpio" Cvendor="ArteryTek" Cversion="2.0.0" condition="AT32F425 STDPERIPHERALS CRM"/>
-        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.1"/>
+        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.6"/>
         <targetInfos>
           <targetInfo name="ATSTART_F425_V1"/>
         </targetInfos>
@@ -637,7 +605,7 @@
       <file attr="config" category="source" name="Device\Firmware\Peripherals\src\at32f425_i2c.c" version="2.0.0">
         <instance index="0">RTE\Device\-AT32F425R8T7-7\at32f425_i2c.c</instance>
         <component Cclass="Device" Cgroup="at32f425_firmware_library" Csub="i2c" Cvendor="ArteryTek" Cversion="2.0.0" condition="AT32F425 STDPERIPHERALS CRM"/>
-        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.1"/>
+        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.6"/>
         <targetInfos>
           <targetInfo name="ATSTART_F425_V1"/>
         </targetInfos>
@@ -645,7 +613,7 @@
       <file attr="config" category="source" name="Device\Firmware\Peripherals\src\at32f425_misc.c" version="2.0.0">
         <instance index="0">RTE\Device\-AT32F425R8T7-7\at32f425_misc.c</instance>
         <component Cclass="Device" Cgroup="at32f425_firmware_library" Csub="misc" Cvendor="ArteryTek" Cversion="2.0.0" condition="AT32F425 CMSIS"/>
-        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.1"/>
+        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.6"/>
         <targetInfos>
           <targetInfo name="ATSTART_F425_V1"/>
         </targetInfos>
@@ -653,7 +621,7 @@
       <file attr="config" category="source" name="Device\Firmware\Peripherals\src\at32f425_scfg.c" version="2.0.0">
         <instance index="0">RTE\Device\-AT32F425R8T7-7\at32f425_scfg.c</instance>
         <component Cclass="Device" Cgroup="at32f425_firmware_library" Csub="scfg" Cvendor="ArteryTek" Cversion="2.0.0" condition="AT32F425 STDPERIPHERALS CRM"/>
-        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.1"/>
+        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.6"/>
         <targetInfos>
           <targetInfo name="ATSTART_F425_V1"/>
         </targetInfos>
@@ -661,23 +629,23 @@
       <file attr="config" category="source" name="Device\Firmware\Peripherals\src\at32f425_usart.c" version="2.0.0">
         <instance index="0">RTE\Device\-AT32F425R8T7-7\at32f425_usart.c</instance>
         <component Cclass="Device" Cgroup="at32f425_firmware_library" Csub="usart" Cvendor="ArteryTek" Cversion="2.0.0" condition="AT32F425 STDPERIPHERALS CRM"/>
-        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.1"/>
+        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.6"/>
         <targetInfos>
           <targetInfo name="ATSTART_F425_V1"/>
         </targetInfos>
       </file>
       <file attr="config" category="source" condition="AT32F425xx ARMCC" name="Device\Source\ARM\startup_at32f425.s" version="2.0.0">
         <instance index="0">RTE\Device\-AT32F425R8T7-7\startup_at32f425.s</instance>
-        <component Cclass="Device" Cgroup="startup" Cvendor="ArteryTek" Cversion="2.0.0" condition="AT32F425"/>
-        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.1"/>
+        <component Cclass="Device" Cgroup="Startup" Cvendor="ArteryTek" Cversion="2.0.0" condition="AT32F425"/>
+        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.6"/>
         <targetInfos>
           <targetInfo name="ATSTART_F425_V1"/>
         </targetInfos>
       </file>
       <file attr="config" category="source" name="Device\Source\system_at32f425.c" version="2.0.0">
         <instance index="0">RTE\Device\-AT32F425R8T7-7\system_at32f425.c</instance>
-        <component Cclass="Device" Cgroup="startup" Cvendor="ArteryTek" Cversion="2.0.0" condition="AT32F425"/>
-        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.1"/>
+        <component Cclass="Device" Cgroup="Startup" Cvendor="ArteryTek" Cversion="2.0.0" condition="AT32F425"/>
+        <package name="AT32F425_DFP" schemaVersion="1.2" url="" vendor="ArteryTek" version="2.0.6"/>
         <targetInfos>
           <targetInfo name="ATSTART_F425_V1"/>
         </targetInfos>
